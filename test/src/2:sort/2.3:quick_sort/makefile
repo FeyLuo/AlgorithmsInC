@@ -5,8 +5,6 @@ CXXFLAGS += -include $(CPPUTEST_HOME)/include/CppUTest/MemoryLeakDetectorNewMacr
 CFLAGS += -include $(CPPUTEST_HOME)/include/CppUTest/MemoryLeakDetectorMallocMacros.h
 
 LD_LIBRARIES = -L$(CPPUTEST_HOME)/lib -lCppUTest -lCppUTestExt
-
-test: test.o test.cpp
 mytest: test.o
 	g++ -g -o test test.o  $(LD_LIBRARIES)
 test.o: test.cpp 
