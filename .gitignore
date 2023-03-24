@@ -1,4 +1,4 @@
-*
-!*.c
-!*.cpp
-!*.h
+*.o
+.*/
+build/**
+!build/makefile

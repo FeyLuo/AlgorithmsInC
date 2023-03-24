@@ -11,8 +11,6 @@
 #define GET_INT_VALUE(adt) (*((int *)&adt))
 #define GET_CHAR_VALUE(adt) (*((char *)&adt))
 
-
-
 struct adt{
     union{
         short   a;
@@ -47,6 +45,14 @@ bool less(struct adt* a, struct adt* b);
 
 void exch(struct adt* adt, int i, int j);
 
+void show(struct adt* adt);
+
+bool is_sorted(struct adt* adt);
+
 struct adt* adt_array(int type, int size);
+
+struct adt* adt_array(int type, int size, int* ptr);
+
+struct adt* adt_array(int type, int size, char* ptr);
 
 #endif
