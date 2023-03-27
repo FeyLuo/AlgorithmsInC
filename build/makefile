@@ -7,7 +7,7 @@ CFLAGS += -include $(CPPUTEST_HOME)/include/CppUTest/MemoryLeakDetectorMallocMac
 LD_LIBRARIES = -L$(CPPUTEST_HOME)/lib -lCppUTest -lCppUTestExt
 
 #***********************************************************************#
-#				  build useful tools like adt, plot, etc.				#
+#                build useful tools like adt, plot, etc.                #
 #***********************************************************************#
 
 tools: adt
@@ -28,19 +28,22 @@ adt.o: $(TOOL_HOME)/adt.cpp
 
 #***********************************************************************#
 
-sort: elementary_sort merge_sort
+sort: elementary_sort merge_sort quick_sort
 
 export SORT_HOME = ../src/2\:sort
 export SORT_2_1 = $(SORT_HOME)/2.1\:elementary_sort
 export SORT_2_2 = $(SORT_HOME)/2.2\:merge_sort
+export SORT_2_3 = $(SORT_HOME)/2.3\:quick_sort
 
-test_sort: test_elementary_sort test_merge_sort
+test_sort: test_elementary_sort test_merge_sort test_quick_sort
 	./test_elementary_sort
 	./test_merge_sort
+	./test_quick_sort
 
 export TEST_SORT_HOME = ../test/src/2\:sort
 export TEST_2_1 = $(TEST_SORT_HOME)/2.1\:elementary_sort
 export TEST_2_2 = $(TEST_SORT_HOME)/2.2\:merge_sort
+export TEST_2_3 = $(TEST_SORT_HOME)/2.3\:quick_sort
 
 
 test_elementary_sort: test_elementary_sort.o elementary_sort.o adt.o
@@ -58,6 +61,14 @@ test_merge_sort.o: $(TEST_2_2)/test_merge_sort.cpp
 	g++ -g $(CPPFLAGS) -c $(TEST_2_2)/test_merge_sort.cpp
 merge_sort.o: $(SORT_2_2)/merge_sort.cpp 
 	g++ -g $(CPPFLAGS) -c $(SORT_2_2)/merge_sort.cpp
+
+test_quick_sort: test_quick_sort.o quick_sort.o adt.o
+	g++ -g -o test_quick_sort test_quick_sort.o quick_sort.o adt.o $(LD_LIBRARIES)
+	./test_quick_sort
+test_quick_sort.o: $(TEST_2_3)/test_quick_sort.cpp
+	g++ -g $(CPPFLAGS) -c $(TEST_2_3)/test_quick_sort.cpp
+quick_sort.o: $(SORT_2_3)/quick_sort.cpp 
+	g++ -g $(CPPFLAGS) -c $(SORT_2_3)/quick_sort.cpp
 
 #***********************************************************************#
 
