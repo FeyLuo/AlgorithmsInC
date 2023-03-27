@@ -74,7 +74,7 @@ bool is_sorted(struct adt* adt)
 //
 // @a: the array to copy value to b.
 // @b: the array to be copied.
-// notice: [lo, hi]
+// range: [lo, hi]
 //
 bool copy(struct adt* a, struct adt *b, int lo, int hi)
 {
