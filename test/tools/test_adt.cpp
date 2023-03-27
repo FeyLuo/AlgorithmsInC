@@ -67,6 +67,16 @@ TEST(int_group, is_sorted_test)
     CHECK(is_sorted(adt));
 }
 
+TEST(int_group, copy_test)
+{
+    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+    struct adt* adt1 = adt_array(INT, 10, a);
+    struct adt* adt2 = adt_array(INT, 10);
+    copy(adt1, adt2, 0, 5);
+    for(int i = 0; i < 5; i++)
+        LONGS_EQUAL(GET_INT_VALUE(adt1[i]), GET_INT_VALUE(adt2[i]));
+}
+
 
 TEST(char_group, less_test)
 {
@@ -104,6 +114,16 @@ TEST(char_group, is_sorted_test)
     CHECK(!is_sorted(adt));
     set_value(&adt[8], 'i');
     CHECK(is_sorted(adt));
+}
+
+TEST(char_group, copy_test)
+{
+    char a[] = "abcdefgha";
+    struct adt* adt1 = adt_array(CHAR, 10, a);
+    struct adt* adt2 = adt_array(CHAR, 10);
+    copy(adt1, adt2, 0, 5);
+    for(int i = 0; i < 5; i++)
+        LONGS_EQUAL(GET_INT_VALUE(adt1[i]), GET_INT_VALUE(adt2[i]));
 }
 
 int main(int argc, char** argv)

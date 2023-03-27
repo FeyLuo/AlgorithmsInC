@@ -70,6 +70,34 @@ bool is_sorted(struct adt* adt)
     return true;
 }
 
+
+//
+// @a: the array to copy value to b.
+// @b: the array to be copied.
+// notice: [lo, hi]
+//
+bool copy(struct adt* a, struct adt *b, int lo, int hi)
+{
+    int i = lo;
+    if(a->type != b->type)
+        return false;
+    switch (a->type)
+    {
+    case INT:{
+        for(i; i <= hi; i++)
+            set_value(&b[i], a[i].b);
+        break;
+    }
+    case CHAR:
+        for(i; i <= hi; i++)
+            set_value(&b[i], a[i].f);
+        break;
+    default:
+        return false;
+    }
+    return true;
+}
+
 struct adt* adt_array(int type, int size)
 {
     struct adt* array = (struct adt*)calloc(size,sizeof(struct adt));

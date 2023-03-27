@@ -41,6 +41,12 @@ inline char set_value(struct adt *adt, char a)
     return (adt->f = a);
 }
 
+inline void set_value(struct adt *a, struct adt *b)
+{
+    if(a->type == INT) a->b = b->b;
+    else if(a->type == CHAR) a->f = b->f;
+}
+
 bool less(struct adt* a, struct adt* b);
 
 void exch(struct adt* adt, int i, int j);
@@ -48,6 +54,8 @@ void exch(struct adt* adt, int i, int j);
 void show(struct adt* adt);
 
 bool is_sorted(struct adt* adt);
+
+bool copy(struct adt* a, struct adt *b, int lo, int hi);
 
 struct adt* adt_array(int type, int size);
 
