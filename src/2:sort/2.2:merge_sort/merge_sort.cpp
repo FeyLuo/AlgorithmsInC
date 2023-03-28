@@ -6,13 +6,12 @@ struct adt *aux;
 
 static void merge(struct adt *array, int lo, int mid, int hi)
 {
-    printf("%s(%d, %d, %d)\n", __func__, lo, mid, hi);
     int i = lo, j = mid + 1;
     copy(array, aux, lo, hi);
     for(int k = lo; k <= hi; k++){
         if(i > mid)                     set_value(&array[k], &aux[j++]);
         else if(j > hi)                 set_value(&array[k], &aux[i++]);
-        else if(less(&aux[i], &aux[j])) set_value(&array[k], &aux[i++]);
+        else if(less(aux[i], aux[j]))   set_value(&array[k], &aux[i++]);
         else                            set_value(&array[k], &aux[j++]);
     }
 }

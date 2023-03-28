@@ -47,7 +47,11 @@ inline void set_value(struct adt *a, struct adt *b)
     else if(a->type == CHAR) a->f = b->f;
 }
 
-bool less(struct adt* a, struct adt* b);
+int cmp(struct adt a, struct adt b);
+
+bool less(struct adt a, struct adt b);
+
+bool less_abs(struct adt a, struct adt b);
 
 void exch(struct adt* adt, int i, int j);
 

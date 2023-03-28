@@ -34,7 +34,7 @@ TEST(int_group, less_test)
 {
     set_value(&int_array[0], 100);
     set_value(&int_array[1], 200);
-    CHECK(less(&int_array[0], &int_array[1]));
+    CHECK(less(int_array[0], int_array[1]));
 }
 
 TEST(int_group, len_test)
@@ -82,7 +82,7 @@ TEST(char_group, less_test)
 {
     set_value(&char_array[0], 'a');
     set_value(&char_array[1], 'b');
-    CHECK(less(&char_array[0], &char_array[1]));
+    CHECK(less(char_array[0], char_array[1]));
 }
 
 TEST(char_group, len_test)

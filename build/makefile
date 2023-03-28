@@ -28,22 +28,27 @@ adt.o: $(TOOL_HOME)/adt.cpp
 
 #***********************************************************************#
 
-sort: elementary_sort merge_sort quick_sort
+sort: elementary_sort merge_sort quick_sort priority_queues
 
 export SORT_HOME = ../src/2\:sort
 export SORT_2_1 = $(SORT_HOME)/2.1\:elementary_sort
 export SORT_2_2 = $(SORT_HOME)/2.2\:merge_sort
 export SORT_2_3 = $(SORT_HOME)/2.3\:quick_sort
+export SORT_2_4 = $(SORT_HOME)/2.4\:priority_queues
+export SORT_2_5 = $(SORT_HOME)/2.5\:applications
 
-test_sort: test_elementary_sort test_merge_sort test_quick_sort
-	./test_elementary_sort
-	./test_merge_sort
-	./test_quick_sort
+test_sort: test_elementary_sort test_merge_sort test_quick_sort test_priority_queues
+	./test_elementary_sort -c
+	./test_merge_sort -c
+	./test_quick_sort -c -v
+	./test_priority_queues -c
 
 export TEST_SORT_HOME = ../test/src/2\:sort
 export TEST_2_1 = $(TEST_SORT_HOME)/2.1\:elementary_sort
 export TEST_2_2 = $(TEST_SORT_HOME)/2.2\:merge_sort
 export TEST_2_3 = $(TEST_SORT_HOME)/2.3\:quick_sort
+export TEST_2_4 = $(TEST_SORT_HOME)/2.4\:priority_queues
+export TEST_2_5 = $(TEST_SORT_HOME)/2.5\:applications
 
 
 test_elementary_sort: test_elementary_sort.o elementary_sort.o adt.o
@@ -69,6 +74,14 @@ test_quick_sort.o: $(TEST_2_3)/test_quick_sort.cpp
 	g++ -g $(CPPFLAGS) -c $(TEST_2_3)/test_quick_sort.cpp
 quick_sort.o: $(SORT_2_3)/quick_sort.cpp 
 	g++ -g $(CPPFLAGS) -c $(SORT_2_3)/quick_sort.cpp
+
+test_priority_queues: test_priority_queues.o priority_queues.o adt.o
+	g++ -g -o test_priority_queues test_priority_queues.o priority_queues.o adt.o $(LD_LIBRARIES)
+	./test_priority_queues
+test_priority_queues.o: $(TEST_2_4)/test_priority_queues.cpp
+	g++ -g $(CPPFLAGS) -c $(TEST_2_4)/test_priority_queues.cpp
+priority_queues.o: $(SORT_2_4)/priority_queues.cpp 
+	g++ -g $(CPPFLAGS) -c $(SORT_2_4)/priority_queues.cpp
 
 #***********************************************************************#
 

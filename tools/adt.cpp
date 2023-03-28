@@ -2,14 +2,42 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-bool less(struct adt* a, struct adt* b)
+int cmp(struct adt a, struct adt b)
 {
-    switch (a->type)
+    switch (a.type)
     {
     case INT:
-        return (a->b)<=(b->b);
+        return (a.b)==(b.b) ? 0 : ((a.b)>(b.b) ? 1 : -1);
     case CHAR:
-        return (a->f)<=(b->f);
+        return (a.f)==(b.f) ? 0 : ((a.f)>(b.f) ? 1 : -1);
+    default:
+        return false;
+    }
+}
+
+// less-or-equal function.
+bool less(struct adt a, struct adt b)
+{
+    switch (a.type)
+    {
+    case INT:
+        return (a.b)<=(b.b);
+    case CHAR:
+        return (a.f)<=(b.f);
+    default:
+        return false;
+    }
+}
+
+// absolutely less-than function.
+bool less_abs(struct adt a, struct adt b)
+{
+    switch (a.type)
+    {
+    case INT:
+        return (a.b)<(b.b);
+    case CHAR:
+        return (a.f)<(b.f);
     default:
         return false;
     }
@@ -65,7 +93,7 @@ bool is_sorted(struct adt* adt)
     if(adt->size == 1)  
         return true;
     for(int i = 0; i < adt->size - 1; i++)
-        if(!less(&adt[i], &adt[i+1]))
+        if(!less(adt[i], adt[i+1]))
             return false;
     return true;
 }
