@@ -1,2 +1,2 @@
-# Algorithms
-Reimplement 《Algorithms》 with TDD.
+# Algorithms in C
+Reimplement 《Algorithms》 in C, using cppUTest as test unit.
