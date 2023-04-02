@@ -1,15 +1,17 @@
-void selection_sort(struct adt *adt);
+void selection_sort(Template *T);
 
-void insertion_sort(struct adt *adt);
+void insertion_sort(Template *T);
 
-void shell_sort(struct adt *adt);
+void shell_sort(Template *T);
 
-void topdown_merge_sort(struct adt *adt);
+void topdown_merge_sort(Template *T);
 
-void bottomup_merge_sort(struct adt *adt);
+void bottomup_merge_sort(Template *T);
 
-void quick_sort(struct adt *adt);
+void quick_sort(Template *T);
 
-void quick_3way_sort(struct adt *adt);
+void quick_3way_sort(Template *T);
 
-void heap_sort(struct adt *adt);
+void heap_sort_swim(Template *T);
+
+void heap_sort_sink(Template *T);

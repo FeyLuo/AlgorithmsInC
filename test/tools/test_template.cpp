@@ -1,14 +1,14 @@
 #include <CppUTest/CommandLineTestRunner.h>
 #include <CppUTest/TestHarness.h>
-#include "adt.h"
+#include "template.h"
 
-static struct adt *int_array, *char_array;
+static Template *int_array, *char_array;
 
 TEST_GROUP(int_group)
 {
    void setup()
    {
-        int_array = adt_array(INT, 10);
+        int_array = Template_array(INT, 10);
    }
 
    void teardown()
@@ -21,7 +21,7 @@ TEST_GROUP(char_group)
 {
    void setup()
    {
-        char_array = adt_array(CHAR, 10);
+        char_array = Template_array(CHAR, 10);
    }
 
    void teardown()
@@ -53,28 +53,28 @@ TEST(int_group, exch_test)
 TEST(int_group, show_test)
 {
     int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
-    struct adt* adt = adt_array(INT, 10, a);
-    show(adt);
-    free(adt);
+    Template* Template = Template_array(INT, 10, a);
+    show(Template);
+    free(Template);
 }
 
 TEST(int_group, is_sorted_test)
 {
     int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
-    struct adt* adt = adt_array(INT, 10, a);
-    CHECK(!is_sorted(adt));
-    set_value(&adt[9], 10);
-    CHECK(is_sorted(adt));
+    Template* Template = Template_array(INT, 10, a);
+    CHECK(!is_sorted(Template));
+    set_value(&Template[9], 10);
+    CHECK(is_sorted(Template));
 }
 
 TEST(int_group, copy_test)
 {
     int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
-    struct adt* adt1 = adt_array(INT, 10, a);
-    struct adt* adt2 = adt_array(INT, 10);
-    copy(adt1, adt2, 0, 5);
+    Template* Template1 = Template_array(INT, 10, a);
+    Template* Template2 = Template_array(INT, 10);
+    copy(Template1, Template2, 0, 5);
     for(int i = 0; i < 5; i++)
-        LONGS_EQUAL(GET_INT_VALUE(adt1[i]), GET_INT_VALUE(adt2[i]));
+        LONGS_EQUAL(GET_INT_VALUE(Template1[i]), GET_INT_VALUE(Template2[i]));
 }
 
 
@@ -102,28 +102,28 @@ TEST(char_group, exch_test)
 TEST(char_group, show_test)
 {
     char a[] = "abcdefgha";
-    struct adt* adt = adt_array(CHAR, sizeof(a), a);
-    show(adt);
-    free(adt);
+    Template* Template = Template_array(CHAR, sizeof(a), a);
+    show(Template);
+    free(Template);
 }
 
 TEST(char_group, is_sorted_test)
 {
     char a[] = "abcdefgha";
-    struct adt* adt = adt_array(CHAR, sizeof(a), a);
-    CHECK(!is_sorted(adt));
-    set_value(&adt[8], 'i');
-    CHECK(is_sorted(adt));
+    Template* Template = Template_array(CHAR, sizeof(a), a);
+    CHECK(!is_sorted(Template));
+    set_value(&Template[8], 'i');
+    CHECK(is_sorted(Template));
 }
 
 TEST(char_group, copy_test)
 {
     char a[] = "abcdefgha";
-    struct adt* adt1 = adt_array(CHAR, 10, a);
-    struct adt* adt2 = adt_array(CHAR, 10);
-    copy(adt1, adt2, 0, 5);
+    Template* Template1 = Template_array(CHAR, 10, a);
+    Template* Template2 = Template_array(CHAR, 10);
+    copy(Template1, Template2, 0, 5);
     for(int i = 0; i < 5; i++)
-        LONGS_EQUAL(GET_INT_VALUE(adt1[i]), GET_INT_VALUE(adt2[i]));
+        LONGS_EQUAL(GET_INT_VALUE(Template1[i]), GET_INT_VALUE(Template2[i]));
 }
 
 int main(int argc, char** argv)

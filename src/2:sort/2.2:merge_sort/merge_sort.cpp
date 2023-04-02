@@ -1,10 +1,10 @@
-#include "adt.h"
+#include "template.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-struct adt *aux;
+Template *aux;
 
-static void merge(struct adt *array, int lo, int mid, int hi)
+static void merge(Template *array, int lo, int mid, int hi)
 {
     int i = lo, j = mid + 1;
     copy(array, aux, lo, hi);
@@ -16,28 +16,28 @@ static void merge(struct adt *array, int lo, int mid, int hi)
     }
 }
 
-static void topdown_merge_sort_r(struct adt *adt, int lo, int hi)
+static void topdown_merge_sort_r(Template *T, int lo, int hi)
 {
     if(hi <= lo) return;
     int mid = (lo + hi)/2;
-    topdown_merge_sort_r(adt, lo, mid);
-    topdown_merge_sort_r(adt, mid + 1, hi);
-    merge(adt, lo, mid, hi);
+    topdown_merge_sort_r(T, lo, mid);
+    topdown_merge_sort_r(T, mid + 1, hi);
+    merge(T, lo, mid, hi);
 }
 
-void topdown_merge_sort(struct adt *adt)
+void topdown_merge_sort(Template *T)
 {
-    aux = adt_array(adt->type, adt->size);
-    topdown_merge_sort_r(adt, 0, adt->size - 1);
+    aux = Template_array(T->type, T->size);
+    topdown_merge_sort_r(T, 0, T->size - 1);
     free(aux);
 }
 
-void bottomup_merge_sort(struct adt *adt)
+void bottomup_merge_sort(Template *T)
 {
-    aux = adt_array(adt->type, adt->size);
-    int length = adt->size;
+    aux = Template_array(T->type, T->size);
+    int length = T->size;
     for(int ssize = 1; ssize < length; ssize *= 2)
         for(int lo = 0; lo < length; lo += 2 * ssize)
-            merge(adt, lo, lo + ssize - 1, (lo + 2*ssize - 1)>length? length: (lo + 2*ssize - 1));
+            merge(T, lo, lo + ssize - 1, (lo + 2*ssize - 1)>length? length: (lo + 2*ssize - 1));
     free(aux);
 }

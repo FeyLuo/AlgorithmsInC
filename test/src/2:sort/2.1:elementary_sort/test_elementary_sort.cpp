@@ -1,6 +1,6 @@
 #include <CppUTest/CommandLineTestRunner.h>
 #include <CppUTest/TestHarness.h>
-#include "adt.h"
+#include "template.h"
 #include "sort.h"
 
 
@@ -33,7 +33,7 @@ TEST_GROUP(qa_group)
 TEST(sort_group, selection_sort_test)
 {
     char a[] = "SORTEXAMPLE";
-    struct adt *char_array  = adt_array(CHAR, sizeof(a), a);
+    Template *char_array  = Template_array(CHAR, sizeof(a), a);
     selection_sort(char_array);
     CHECK(is_sorted(char_array));
     free(char_array);
@@ -42,7 +42,7 @@ TEST(sort_group, selection_sort_test)
 TEST(sort_group, insertion_sort_test)
 {
     char a[] = "SORTEXAMPLE";
-    struct adt *char_array  = adt_array(CHAR, sizeof(a), a);
+    Template *char_array  = Template_array(CHAR, sizeof(a), a);
     insertion_sort(char_array);
     CHECK(is_sorted(char_array));
     free(char_array);
@@ -51,13 +51,13 @@ TEST(sort_group, insertion_sort_test)
 TEST(sort_group, shell_sort_test)
 {
     char a[] = "SHELLSORTEXAMPLE";
-    struct adt *char_array  = adt_array(CHAR, sizeof(a), a);
+    Template *char_array  = Template_array(CHAR, sizeof(a), a);
     shell_sort(char_array);
     CHECK(is_sorted(char_array));
     free(char_array);
 
     char b[] = "EASYSHELLSORTQUESTION";
-    char_array  = adt_array(CHAR, sizeof(b), b);
+    char_array  = Template_array(CHAR, sizeof(b), b);
     shell_sort(char_array);
     CHECK(is_sorted(char_array));
     free(char_array);

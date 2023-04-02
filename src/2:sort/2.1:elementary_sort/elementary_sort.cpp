@@ -1,36 +1,36 @@
-#include "adt.h"
+#include "template.h"
 
-void selection_sort(struct adt *adt)
+void selection_sort(Template *T)
 {
-    int length = adt->size;
+    int length = T->size;
     for(int i = 0; i < length; i++){
         int min = i;
         for(int j = i + 1; j < length; j++){
-            if(less(adt[j], adt[min]))
+            if(less(T[j], T[min]))
                 min = j;
         }
-        exch(adt, i, min);
+        exch(T, i, min);
     }
 }
 
-void insertion_sort(struct adt *adt)
+void insertion_sort(Template *T)
 {
-    int length = adt->size;
+    int length = T->size;
     for(int i = 1; i < length; i++){
-        for(int j = i; j > 0 && less(adt[j], adt[j-1]); j--)
-            exch(adt, j, j-1);
+        for(int j = i; j > 0 && less(T[j], T[j-1]); j--)
+            exch(T, j, j-1);
     }
 }
 
-void shell_sort(struct adt *adt)
+void shell_sort(Template *T)
 {
-    int length = adt->size;
+    int length = T->size;
     int h = 1;
-    while(h < (adt->size)/3) h = 3*h + 1;
+    while(h < (T->size)/3) h = 3*h + 1;
     while(h >= 1){
-        for(int i = h; i < adt->size; i++){
-            for(int j = i; j >= h && less(adt[j], adt[j-h]); j -= h){
-                exch(adt, j, j-h);
+        for(int i = h; i < T->size; i++){
+            for(int j = i; j >= h && less(T[j], T[j-h]); j -= h){
+                exch(T, j, j-h);
             }
         }
         h /= 3;

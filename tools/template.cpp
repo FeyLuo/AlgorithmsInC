@@ -1,8 +1,8 @@
-#include "include/adt.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "template.h"
 
-int cmp(struct adt a, struct adt b)
+int cmp(Template a, Template b)
 {
     switch (a.type)
     {
@@ -16,7 +16,7 @@ int cmp(struct adt a, struct adt b)
 }
 
 // less-or-equal function.
-bool less(struct adt a, struct adt b)
+bool less(Template a, Template b)
 {
     switch (a.type)
     {
@@ -30,7 +30,7 @@ bool less(struct adt a, struct adt b)
 }
 
 // absolutely less-than function.
-bool less_abs(struct adt a, struct adt b)
+bool less_abs(Template a, Template b)
 {
     switch (a.type)
     {
@@ -43,24 +43,24 @@ bool less_abs(struct adt a, struct adt b)
     }
 }
 
-void exch(struct adt* adt, int i, int j)
+void exch(Template* Template, int i, int j)
 {
-    switch (adt->type)
+    switch (Template->type)
     {
     case INT:
     {
         int tmp;
-        tmp      = adt[i].b;
-        adt[i].b = adt[j].b;
-        adt[j].b = tmp;
+        tmp      = Template[i].b;
+        Template[i].b = Template[j].b;
+        Template[j].b = tmp;
         return;
     }
     case CHAR:
     {
         char tmp;
-        tmp      = adt[i].f;
-        adt[i].f = adt[j].f;
-        adt[j].f = tmp;
+        tmp      = Template[i].f;
+        Template[i].f = Template[j].f;
+        Template[j].f = tmp;
         return;
     }
     default:
@@ -68,19 +68,19 @@ void exch(struct adt* adt, int i, int j)
     }
 }
 
-void show(struct adt* adt)
+void show(Template* Template)
 {
     int i = 0;
-    switch (adt->type)
+    switch (Template->type)
     {
     case INT:{
-        for(i; i < adt->size; i++)
-            printf("%d ", adt[i].b);
+        for(i; i < Template->size; i++)
+            printf("%d ", Template[i].b);
         break;
     }
     case CHAR:
-        for(i; i < adt->size; i++)
-            printf("%c ", adt[i].f);
+        for(i; i < Template->size; i++)
+            printf("%c ", Template[i].f);
         break;
     default:
         break;
@@ -88,23 +88,23 @@ void show(struct adt* adt)
     printf("\n");
 }
 
-bool is_sorted(struct adt* adt)
+bool is_sorted(Template* Template)
 {
-    if(adt->size == 1)  
+    if(Template->size == 1)  
         return true;
-    for(int i = 0; i < adt->size - 1; i++)
-        if(!less(adt[i], adt[i+1]))
+    for(int i = 0; i < Template->size - 1; i++)
+        if(!less(Template[i], Template[i+1]))
             return false;
     return true;
 }
 
 
 //
-// @a: the array to copy value to b.
-// @b: the array to be copied.
-// range: [lo, hi]
+// @param a: the array to copy value to b.
+// @param b: the array to be copied.
+// @param lo,hi: range [lo, hi]
 //
-bool copy(struct adt* a, struct adt *b, int lo, int hi)
+bool copy(Template* a, Template *b, int lo, int hi)
 {
     int i = lo;
     if(a->type != b->type)
@@ -126,9 +126,9 @@ bool copy(struct adt* a, struct adt *b, int lo, int hi)
     return true;
 }
 
-struct adt* adt_array(int type, int size)
+Template* Template_array(int type, int size)
 {
-    struct adt* array = (struct adt*)calloc(size,sizeof(struct adt));
+    Template* array = (Template*)calloc(size,sizeof(Template));
     for(int i = 0;i < size; i++){
         array[i].type = type;
         array[i].size = size - i;
@@ -136,9 +136,9 @@ struct adt* adt_array(int type, int size)
     return array;
 }
 
-struct adt* adt_array(int type, int size, int* ptr)
+Template* Template_array(int type, int size, int* ptr)
 {
-    struct adt* array = (struct adt*)calloc(size,sizeof(struct adt));
+    Template* array = (Template*)calloc(size,sizeof(Template));
     for(int i = 0;i < size; i++){
         array[i].type = type;
         array[i].size = size - i;
@@ -147,10 +147,10 @@ struct adt* adt_array(int type, int size, int* ptr)
     return array;
 }
 
-struct adt* adt_array(int type, int size, char* ptr)
+Template* Template_array(int type, int size, char* ptr)
 {
     size--;
-    struct adt* array = (struct adt*)calloc(size,sizeof(struct adt));
+    Template* array = (Template*)calloc(size,sizeof(Template));
     for(int i = 0;i < size; i++){
         array[i].type = type;
         array[i].size = size - i;
