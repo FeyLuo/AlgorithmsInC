@@ -3,9 +3,11 @@
 
 #include "template.h"
 
-typedef struct Node{
+#define NULL ((void*) 0)
+
+typedef struct node{
     Template*   value;
-    Node*      next;
+    node*      next;
 }Node;  
 
 typedef struct{

@@ -14,6 +14,7 @@ TEST_GROUP(sort_group)
 
    void teardown()
    {
+        free(char_array);
    }
 };
 
@@ -52,7 +53,18 @@ TEST(sort_group, sink_test)
     CHECK(is_heaped(char_array));
 }
 
-TEST(sort_group, heap_sort_test)
+TEST(sort_group, heap_sort_sink_test)
+{
+    char a[] = "SORTEXAMPLE";
+    
+    char_array  = Template_array(CHAR, sizeof(a), a);
+    
+    heap_sort_sink(char_array);
+    
+    CHECK(is_sorted(char_array));
+}
+
+TEST(sort_group, heap_sort_swim_test)
 {
     char a[] = "SORTEXAMPLE";
     

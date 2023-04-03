@@ -27,7 +27,7 @@ test_template.o: $(TEST_TOOL_HOME)/test_template.cpp
 template.o: $(TOOL_HOME)/template.cpp
 	g++ -g $(CPPFLAGS) -c $(TOOL_HOME)/template.cpp
 
-test_ADT: test_ADT.o ADT.o
+test_ADT: test_ADT.o ADT.o template.o
 	g++ -g -o test_ADT test_ADT.o  ADT.o template.o $(LD_LIBRARIES)
 test_ADT.o: $(TEST_TOOL_HOME)/test_ADT.cpp
 	g++ -g $(CPPFLAGS) -c $(TEST_TOOL_HOME)/test_ADT.cpp
@@ -36,7 +36,7 @@ ADT.o: $(TOOL_HOME)/ADT.cpp
 
 #***********************************************************************#
 
-sort: elementary_sort merge_sort quick_sort priority_queues
+sort: elementary_sort merge_sort quick_sort priority_queues applications
 
 export SORT_HOME = ../src/2\:sort
 export SORT_2_1 = $(SORT_HOME)/2.1\:elementary_sort
@@ -45,11 +45,12 @@ export SORT_2_3 = $(SORT_HOME)/2.3\:quick_sort
 export SORT_2_4 = $(SORT_HOME)/2.4\:priority_queues
 export SORT_2_5 = $(SORT_HOME)/2.5\:applications
 
-test_sort: test_elementary_sort test_merge_sort test_quick_sort test_priority_queues
+test_sort: test_elementary_sort test_merge_sort test_quick_sort test_priority_queues test_applications
 	./test_elementary_sort -c
 	./test_merge_sort -c
 	./test_quick_sort -c -v
 	./test_priority_queues -c
+	./test_applications -c
 
 export TEST_SORT_HOME = ../test/src/2\:sort
 export TEST_2_1 = $(TEST_SORT_HOME)/2.1\:elementary_sort
@@ -90,6 +91,14 @@ test_priority_queues.o: $(TEST_2_4)/test_priority_queues.cpp
 	g++ -g $(CPPFLAGS) -c $(TEST_2_4)/test_priority_queues.cpp
 priority_queues.o: $(SORT_2_4)/priority_queues.cpp 
 	g++ -g $(CPPFLAGS) -c $(SORT_2_4)/priority_queues.cpp
+
+test_applications: test_applications.o applications.o template.o
+	g++ -g -o test_applications test_applications.o applications.o template.o $(LD_LIBRARIES)
+	./test_applications
+test_applications.o: $(TEST_2_5)/test_applications.cpp
+	g++ -g $(CPPFLAGS) -c $(TEST_2_5)/test_applications.cpp
+applications.o: $(SORT_2_5)/applications.cpp 
+	g++ -g $(CPPFLAGS) -c $(SORT_2_5)/applications.cpp
 
 #***********************************************************************#
 

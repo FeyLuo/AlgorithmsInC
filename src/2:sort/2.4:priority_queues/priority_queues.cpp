@@ -41,7 +41,13 @@ bool is_heaped(Template* T)
 
 void heap_sort_swim(Template *T)
 {
-
+    for(int i = T->size; i > T->size/2; i--)
+        swim(T, i);
+    int N = T->size - 1;
+    while(N > 0){
+        exch(T, 0, N);
+        sink(T, 1, N--);
+    }
 }
 
 void heap_sort_sink(Template *T)
