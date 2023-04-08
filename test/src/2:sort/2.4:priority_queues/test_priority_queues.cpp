@@ -37,9 +37,9 @@ TEST(sort_group, swim_test)
     
     char_array  = Template_array(CHAR, sizeof(a), a);
 
-    swim(char_array, 5);
+    swim(char_array, 5, cmp_maxPQ);
     CHECK(!is_heaped(char_array));
-    swim(char_array, 9);
+    swim(char_array, 9, cmp_maxPQ);
     CHECK(is_heaped(char_array));
 }
 
@@ -49,7 +49,7 @@ TEST(sort_group, sink_test)
     
     char_array  = Template_array(CHAR, sizeof(a), a);
 
-    sink(char_array, 2);
+    sink(char_array, 2, cmp_maxPQ);
     CHECK(is_heaped(char_array));
 }
 

@@ -92,8 +92,8 @@ test_priority_queues.o: $(TEST_2_4)/test_priority_queues.cpp
 priority_queues.o: $(SORT_2_4)/priority_queues.cpp 
 	g++ -g $(CPPFLAGS) -c $(SORT_2_4)/priority_queues.cpp
 
-test_applications: test_applications.o applications.o template.o
-	g++ -g -o test_applications test_applications.o applications.o template.o $(LD_LIBRARIES)
+test_applications: test_applications.o applications.o priority_queues.o template.o
+	g++ -g -o test_applications test_applications.o applications.o priority_queues.o template.o $(LD_LIBRARIES)
 	./test_applications
 test_applications.o: $(TEST_2_5)/test_applications.cpp
 	g++ -g $(CPPFLAGS) -c $(TEST_2_5)/test_applications.cpp

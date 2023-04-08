@@ -1,5 +1,14 @@
 #pragma once
 
-int Kendall_tau(Template* a, Template* b);
+typedef struct{
+    Template* minPQ;
+    Template* maxPQ;
+    int min_len;
+    int max_len;
+}Meadian_Finder;
 
-int inversions(Template* T);
+int Kendall_tau(int *a, int *b, int size);
+
+int inversions(int* array, int size);
+
+double meadian(Template* T);

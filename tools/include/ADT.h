@@ -3,8 +3,6 @@
 
 #include "template.h"
 
-#define NULL ((void*) 0)
-
 typedef struct node{
     Template*   value;
     node*      next;

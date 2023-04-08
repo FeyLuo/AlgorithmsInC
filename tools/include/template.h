@@ -1,5 +1,4 @@
-#ifndef _TEMPLATE_H
-#define _TEMPLATE_H
+#pragma once
 
 #define INT  1
 #define CHAR 2
@@ -66,5 +65,3 @@ Template* Template_array(int type, int size);
 Template* Template_array(int type, int size, int* ptr);
 
 Template* Template_array(int type, int size, char* ptr);
-
-#endif

@@ -6,6 +6,7 @@ Template *aux;
 
 static void merge(Template *array, int lo, int mid, int hi)
 {
+    //printf("%s(%d, %d, %d)\n", __func__, lo, mid, hi);
     int i = lo, j = mid + 1;
     copy(array, aux, lo, hi);
     for(int k = lo; k <= hi; k++){
@@ -35,9 +36,9 @@ void topdown_merge_sort(Template *T)
 void bottomup_merge_sort(Template *T)
 {
     aux = Template_array(T->type, T->size);
-    int length = T->size;
-    for(int ssize = 1; ssize < length; ssize *= 2)
+    int length = T->size - 1;
+    for(int ssize = 1; ssize <= length; ssize *= 2)
         for(int lo = 0; lo < length; lo += 2 * ssize)
-            merge(T, lo, lo + ssize - 1, (lo + 2*ssize - 1)>length? length: (lo + 2*ssize - 1));
+            merge(T, lo, lo + ssize - 1, (lo + 2*ssize - 1) >= length? length: (lo + 2*ssize - 1));
     free(aux);
 }
