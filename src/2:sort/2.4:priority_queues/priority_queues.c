@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include "template.h"
 #include "priority_queues.h"
 

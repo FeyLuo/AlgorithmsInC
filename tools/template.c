@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include "template.h"
 
 int cmp(Template a, Template b)
